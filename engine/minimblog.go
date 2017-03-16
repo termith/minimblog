@@ -21,12 +21,17 @@ func postHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(bytesResponse)
 }
 
+func newPostHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusCreated)
+}
+
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hi there, no %s here yet!", r.URL.Path[1:])
 }
 
 func main() {
 	http.HandleFunc("/post/", postHandler)
+	http.HandleFunc("/new/", newPostHandler)
 	http.HandleFunc("/", rootHandler)
 	http.ListenAndServe(":8080", nil)
 }
