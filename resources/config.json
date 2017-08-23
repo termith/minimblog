@@ -1,0 +1,15 @@
+{
+    "logging" : {
+        "levels": {
+            "production": "ERROR",
+            "development": "DEBUG"
+        },
+        "file": "/var/log/minimblog.log"
+    },
+    "database": {
+        "driver": "sqlite"
+    },
+    "application": {
+        "port": 8080
+    }
+}

@@ -1,32 +1,33 @@
 package main
 
 import (
-	"encoding/json"
+	"flag"
 	"fmt"
 	"net/http"
-	"time"
+	"os"
+
+	"github.com/termith/minimblog/common/config"
+	"github.com/termith/minimblog/common/logging"
+	"github.com/termith/minimblog/engine/handlers"
 )
 
-type post struct {
-	Title     string
-	Body      string
-	Author    string
-	Timestamp time.Time
-}
-
-func postHandler(w http.ResponseWriter, r *http.Request) {
-	myPost := post{"My first Title", "What\nis\nup ", "Dmitry Demidov", time.Now()}
-	bytesResponse, _ := json.Marshal(myPost)
-	w.Header().Set("Content-type", "application/json")
-	w.Write(bytesResponse)
-}
-
-func rootHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hi there, no %s here yet!", r.URL.Path[1:])
-}
+var mode string
 
 func main() {
-	http.HandleFunc("/post/", postHandler)
-	http.HandleFunc("/", rootHandler)
-	http.ListenAndServe(":8080", nil)
+
+	flag.StringVar(&mode, "mode", "development", "Run mode: production or development")
+	flag.Parse()
+
+	if mode != "production" || mode != "development" {
+		fmt.Println("Mode should be one of (production, development)")
+		os.Exit(1)
+	}
+	configuration := config.LoadConfig("/etc/minimblog/config.json")
+
+	logging.InitLogs(configuration, mode)
+	addr := fmt.Sprintf(":%d", configuration.Application.Port)
+	http.HandleFunc("/post/", handlers.PostHandler)
+	http.HandleFunc("/", handlers.RootHandler)
+
+	http.ListenAndServe(addr, nil)
 }
