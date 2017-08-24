@@ -4,7 +4,7 @@
             "production": "ERROR",
             "development": "DEBUG"
         },
-        "file": "/var/log/minimblog.log"
+        "file": "minimblog.log"
     },
     "database": {
         "driver": "sqlite"
