@@ -8,13 +8,6 @@ import (
 )
 
 type Config struct {
-	Logging struct {
-		Levels struct {
-			Production  string `json:"production"`
-			Development string `json:"development"`
-		} `json:"levels"`
-		File string `json:"file"`
-	} `json:"logging"`
 	Database struct {
 		Driver string `json:"driver"`
 	} `json:"database"`

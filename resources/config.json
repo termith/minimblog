@@ -1,11 +1,4 @@
 {
-    "logging" : {
-        "levels": {
-            "production": "ERROR",
-            "development": "DEBUG"
-        },
-        "file": "minimblog.log"
-    },
     "database": {
         "driver": "sqlite"
     },

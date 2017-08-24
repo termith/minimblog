@@ -5,33 +5,53 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-
-	"github.com/termith/minimblog/common/config"
 )
 
 var (
-	Info  *log.Logger
-	Warn  *log.Logger
-	Error *log.Logger
+	info  *log.Logger
+	warn  *log.Logger
+	err   *log.Logger
+	debug *log.Logger
 )
 
-func InitLogs(cfg config.Config, mode string) {
+func Info(args ...interface{}) {
+	info.Println(args...)
+}
+
+func Error(args ...interface{}) {
+	err.Println(args...)
+}
+
+func Warn(args ...interface{}) {
+	warn.Println(args...)
+}
+
+func Debug(args ...interface{}) {
+	debug.Println(args...)
+}
+
+// InitLogging initializes logging subsystems
+func InitLogging(logFilePath string, mode string) {
 	logFlags := log.Ldate | log.Ltime | log.Lshortfile
-	logFile, err := os.OpenFile(cfg.Logging.File, os.O_RDWR|os.O_CREATE, 0755)
-	if err != nil {
-		fmt.Println("Error while open logfile")
+	logFile, er := os.OpenFile(logFilePath, os.O_RDWR|os.O_CREATE, 0755)
+	if er != nil {
+		fmt.Println("Error while open logfile: " + logFilePath)
 		os.Exit(1)
 	}
-	Info = log.New(os.Stdout, "INFO: ", logFlags)
-	Warn = log.New(os.Stdout, "WARNING: ", logFlags)
-	Error = log.New(logFile, "ERROR: ", logFlags)
+	info = log.New(os.Stdout, "INFO: ", logFlags)
+	warn = log.New(os.Stdout, "WARNING: ", logFlags)
+	err = log.New(logFile, "ERROR: ", logFlags)
+	debug = log.New(os.Stdout, "DEBUG", logFlags)
 
 	switch mode {
 	case "production":
-		Info.SetOutput(ioutil.Discard)
-		Warn.SetOutput(ioutil.Discard)
+		info.SetOutput(ioutil.Discard)
+		warn.SetOutput(ioutil.Discard)
+		debug.SetOutput(ioutil.Discard)
 	case "development":
-		Info.SetOutput(logFile)
+		info.SetOutput(logFile)
+	case "debug":
+		err.SetOutput(os.Stdout)
 	}
 
 }
