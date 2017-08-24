@@ -12,17 +12,21 @@ import (
 
 var mode string
 
+func startServer(port int) {
+	addr := fmt.Sprintf(":%d", port)
+	http.HandleFunc("/post/", handlers.PostHandler)
+	http.HandleFunc("/", handlers.RootHandler)
+
+	http.ListenAndServe(addr, nil)
+}
+
 func main() {
 
 	flag.StringVar(&mode, "mode", "development", "Run mode: production or development")
 	flag.Parse()
 
-	configuration := config.LoadConfig("/etc/minimblog/config.json")
+	configuration := config.LoadConfig("../resources/config.json")
 
-	logging.InitLogs(*configuration, mode)
-	addr := fmt.Sprintf(":%d", configuration.Application.Port)
-	http.HandleFunc("/post/", handlers.PostHandler)
-	http.HandleFunc("/", handlers.RootHandler)
-
-	http.ListenAndServe(addr, nil)
+	logging.InitLogging("minimblog.log", mode)
+	startServer(configuration.Application.Port)
 }
