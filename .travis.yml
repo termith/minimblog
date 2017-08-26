@@ -1,0 +1,9 @@
+language: go
+
+go:
+  - master
+
+script: 
+  - if [[ $(go fmt | wc -l) -ne 1]]; then exit 1; fi
+  - go test .
+  - go build 
