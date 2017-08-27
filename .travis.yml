@@ -4,8 +4,6 @@ go:
   - master
 
 script: 
-  - if [[ $(go fmt common | wc -l) -ne 1]]; then exit 1; fi
-  - if [[ $(go fmt engine | wc -l) -ne 1]]; then exit 1; fi
-  - if [[ $(go fmt minimblog.go | wc -l) -ne 1]]; then exit 1; fi
+  - if [ $(go fmt . | wc -l) -ne 1 ]; then exit 1; fi
   - go test .
   - go build 
