@@ -3,7 +3,12 @@ language: go
 go:
   - master
 
+before_install:
+  -sudo apt-get update
+  -sudo apt-get install -y python-pytest
+
 script: 
   - if [ $(go fmt . | wc -l) -ne 0 ]; then exit 1; fi
   - go test .
   - go build 
+  - py.test -vvvvv -s -l -x tests/
