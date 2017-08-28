@@ -8,6 +8,6 @@ def test_engine_running():
     """
         Check that engine is running
     """
-    assert 'minimblog' in subprocess.check_output('ps ax')
+    assert 'minimblog' in str(subprocess.check_output(['ps', '-a']))
 
  
