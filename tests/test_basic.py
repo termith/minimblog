@@ -1,11 +1,11 @@
+import os
 import subprocess
 
-import pytest
-
-mark = pytest.mark.usefixtures('run_engine')
 
 def test_engine_running():
     """
         Check that engine is running
     """
+    os.system('minimblog')
     assert 'minimblog' in str(subprocess.check_output(['ps', 'ax']))
+    os.system('killall minimblog')
