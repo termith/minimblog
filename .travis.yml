@@ -13,3 +13,4 @@ script:
   - go test
   - go install 
   - py.test -s -v -l -x tests/
+  
