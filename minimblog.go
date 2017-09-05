@@ -25,7 +25,7 @@ func main() {
 	flag.StringVar(&mode, "mode", "development", "Run mode: production or development")
 	flag.Parse()
 
-	configuration := config.LoadConfig("../resources/config.json")
+	configuration := config.LoadConfig("resources/config.json")
 
 	logging.InitLogging("minimblog.log", mode)
 	startServer(configuration.Application.Port)

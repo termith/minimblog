@@ -3,7 +3,14 @@ language: go
 go:
   - master
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y python-pytest
+
 script: 
+  - export PATH=$PATH:$(go env GOPATH)/bin
   - if [ $(go fmt . | wc -l) -ne 0 ]; then exit 1; fi
-  - go test .
-  - go build 
+  - go test
+  - go install 
+  - py.test -s -v -l -x tests/
+  
