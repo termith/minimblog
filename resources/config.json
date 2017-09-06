@@ -1,6 +1,7 @@
 {
     "database": {
-        "driver": "sqlite"
+        "driver": "sqlite",
+        "url": ""
     },
     "application": {
         "port": 8080

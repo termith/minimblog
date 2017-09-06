@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/termith/minimblog/common/config"
+	"github.com/termith/minimblog/common/db"
 	"github.com/termith/minimblog/common/logging"
 	"github.com/termith/minimblog/engine/handlers"
 )
@@ -27,6 +28,9 @@ func main() {
 
 	configuration := config.LoadConfig("resources/config.json")
 
+	db.InitDBConnection(configuration.Database.Driver, configuration.Database.Url)
+
 	logging.InitLogging("minimblog.log", mode)
+
 	startServer(configuration.Application.Port)
 }

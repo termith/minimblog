@@ -1,0 +1,23 @@
+package db
+
+import (
+	"database/sql"
+	"os"
+
+	"github.com/termith/minimblog/common/logging"
+)
+
+var connection *sql.DB
+
+func Connection() *sql.DB {
+	return connection
+}
+
+func InitDBConnection(driver, url string) {
+	var err error
+	connection, err = sql.Open(driver, url)
+	if err != nil {
+		logging.Error("Error while init DB connection")
+		os.Exit(1)
+	}
+}

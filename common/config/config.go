@@ -10,6 +10,7 @@ import (
 type Config struct {
 	Database struct {
 		Driver string `json:"driver"`
+		Url    string `json:"url"`
 	} `json:"database"`
 	Application struct {
 		Port int `json:"port"`
