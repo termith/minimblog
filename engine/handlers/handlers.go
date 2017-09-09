@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"net/http"
-	"time"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"time"
 )
 
 type post struct {
@@ -23,4 +23,8 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 
 func RootHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hi there, no %s here yet!", r.URL.Path[1:])
+}
+
+func PingHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("ok"))
 }
