@@ -16,6 +16,7 @@ func startServer(port int) {
 	addr := fmt.Sprintf(":%d", port)
 	http.HandleFunc("/post/", handlers.PostHandler)
 	http.HandleFunc("/", handlers.RootHandler)
+	http.HandleFunc("/ping", handlers.PingHandler)
 
 	http.ListenAndServe(addr, nil)
 }
