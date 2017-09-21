@@ -11,6 +11,7 @@ import (
 )
 
 var mode string
+var configPath string
 
 func startServer(port int) {
 	addr := fmt.Sprintf(":%d", port)
@@ -24,9 +25,10 @@ func startServer(port int) {
 func main() {
 
 	flag.StringVar(&mode, "mode", "development", "Run mode: production or development")
+	flag.StringVar(&configPath, "config", "resources/config.json", "Path to config")
 	flag.Parse()
 
-	configuration := config.LoadConfig("resources/config.json")
+	configuration := config.LoadConfig(configPath)
 
 	logging.InitLogging("minimblog.log", mode)
 	startServer(configuration.Application.Port)
