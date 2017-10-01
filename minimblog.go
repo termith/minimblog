@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/termith/minimblog/common/config"
-	"github.com/termith/minimblog/common/logging"
+	"github.com/termith/minimblog/engine/common/config"
+	"github.com/termith/minimblog/engine/common/logging"
 	"github.com/termith/minimblog/engine/handlers"
 )
 
