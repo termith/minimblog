@@ -8,5 +8,8 @@ go get -u github.com/termith/minimblog
 cd src/github.com/termith/minimblog
 go install
 
+mkdir -p /etc/minimblog
+cp resources/config.json /etc/minimblog/congig.json
+
 sqlite3 /etc/minimblog/blog.db engine/common/db/sql/up.sql
-minimblog &
+minimblog /etc/minimblog/config.json &
