@@ -2,14 +2,11 @@ apt-get install -y sqlite3 golang
 
 mkdir -p $HOME/go
 export GOPATH=$HOME/go
-export PATH=$PATH:$(go env GOPATH)/bin
 cd $GOPATH
+
 go get -u github.com/termith/minimblog
 cd src/github.com/termith/minimblog
-go install
+go build minimblog.go -o minimblog
 
-mkdir -p /etc/minimblog
-cp resources/config.json /etc/minimblog/congig.json
-
-sqlite3 /etc/minimblog/blog.db engine/common/db/sql/up.sql
-minimblog /etc/minimblog/config.json &
+sqlite3 resources/blog.db engine/common/db/sql/up.sql
+./minimblog --config resources/config.json &
