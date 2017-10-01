@@ -24,8 +24,10 @@
     "core-js": "^2.4.1",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14",
-    "bootstrap": "4.0.0-alpha.4",
-    "font-awesome": "4.7.0"
+    "bootstrap": "4.0.0-beta",
+    "font-awesome": "4.7.0",
+    "popper.js": "1.12.5",
+    "jquery": "3.2.1"
   },
   "devDependencies": {
     "@angular/cli": "1.4.4",
