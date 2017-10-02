@@ -1,5 +1,6 @@
 *.exe
 *.log
+*.db
 /engine/minimblog
 /.vscode
 tests/__pycache__/

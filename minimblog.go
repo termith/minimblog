@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/termith/minimblog/common/config"
 	"github.com/termith/minimblog/common/db"
-	"github.com/termith/minimblog/common/logging"
+	"github.com/termith/minimblog/engine/common/config"
+	"github.com/termith/minimblog/engine/common/logging"
 	"github.com/termith/minimblog/engine/handlers"
 )
 
 var mode string
+var configPath string
 
 func startServer(port int) {
 	addr := fmt.Sprintf(":%d", port)
@@ -25,9 +26,10 @@ func startServer(port int) {
 func main() {
 
 	flag.StringVar(&mode, "mode", "development", "Run mode: production or development")
+	flag.StringVar(&configPath, "config", "resources/config.json", "Path to config")
 	flag.Parse()
 
-	configuration := config.LoadConfig("resources/config.json")
+	configuration := config.LoadConfig(configPath)
 
 	db.InitDBConnection(configuration.Database.Driver, configuration.Database.Url)
 
