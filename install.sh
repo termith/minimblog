@@ -9,4 +9,4 @@ cd src/github.com/termith/minimblog
 go build minimblog.go -o minimblog
 
 sqlite3 resources/blog.db engine/common/db/sql/up.sql
-./minimblog --config resources/config.json &
+./minimblog --config config.json &

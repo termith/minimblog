@@ -25,7 +25,7 @@ func startServer(port int) {
 func main() {
 
 	flag.StringVar(&mode, "mode", "development", "Run mode: production or development")
-	flag.StringVar(&configPath, "config", "resources/config.json", "Path to config")
+	flag.StringVar(&configPath, "config", "./config.json", "Path to config")
 	flag.Parse()
 
 	configuration := config.LoadConfig(configPath)
