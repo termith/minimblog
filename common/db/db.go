@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"os"
 
+	_ "github.com/mxk/go-sqlite/sqlite3"
 	"github.com/termith/minimblog/engine/common/logging"
 )
 
