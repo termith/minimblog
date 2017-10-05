@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"os"
 
-	"github.com/termith/minimblog/common/logging"
+	"github.com/termith/minimblog/engine/common/logging"
 )
 
 var connection *sql.DB
