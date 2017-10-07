@@ -4,9 +4,11 @@ import (
 	"database/sql"
 	"os"
 
-	_ "github.com/mxk/go-sqlite/sqlite3"
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/termith/minimblog/engine/common/logging"
 )
+
+// TODO: https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/05.3.html
 
 var connection *sql.DB
 

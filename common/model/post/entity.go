@@ -1,11 +1,8 @@
 package post
 
-import (
-	"time"
-)
-
 type Post struct {
-	Title string
-	Text string
-	TimeCreated time.Time
+	Id          int64
+	Title       string
+	Text        string
+	TimeCreated int64
 }

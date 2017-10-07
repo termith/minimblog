@@ -16,7 +16,7 @@ var configPath string
 
 func startServer(port int) {
 	addr := fmt.Sprintf(":%d", port)
-	http.HandleFunc("/post/", handlers.PostHandler)
+	http.HandleFunc("/post/", handlers.NewPostHandler)
 	http.HandleFunc("/", handlers.RootHandler)
 	http.HandleFunc("/ping", handlers.PingHandler)
 
@@ -26,7 +26,7 @@ func startServer(port int) {
 func main() {
 
 	flag.StringVar(&mode, "mode", "development", "Run mode: production or development")
-	flag.StringVar(&configPath, "config", "resources/config.json", "Path to config")
+	flag.StringVar(&configPath, "config", "config.json", "Path to config")
 	flag.Parse()
 
 	configuration := config.LoadConfig(configPath)

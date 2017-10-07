@@ -1,21 +1,27 @@
 package post
 
-const (
-	CREATE_POST    = "INSERT INTO posts (title, text, created) VALUES ($1, $2, $3);"
-	GET_LAST_POSTS = "SELECT title, text, created FROM posts LIMIT $1"
+import (
+	"github.com/termith/minimblog/common/db"
 )
 
-func GetLastPosts(count int) ([]*Post, error) {
-	/*
-		Return %count% of last posts from DB
-	*/
+const (
+	CREATE = "INSERT INTO posts (title, text, created) VALUES ($1, $2, $3);"
+	LIST   = "SELECT title, text, created FROM posts LIMIT"
+)
 
+func GetPosts(count int) ([]*Post, error) {
+	/*
+		Return posts from DB
+	*/
+	rows, err := db.Connection().Query(LIST)
+	var posts []*Post
+	return posts, err
 }
 
-func CreatePost(created int, title, text string) error {
+func CreatePost(created int64, title, text string) error {
 	/*
 		Create post with %title%, %text% created at %created% (Unix time)
 	*/
-	var err error
+	_, err := db.Connection().Query(CREATE, title, text, created)
 	return err
 }
